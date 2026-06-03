@@ -1,4 +1,3 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=24052239)
 <!--
 
 author:   Volker Göhler
@@ -20,17 +19,15 @@ tags: [ Sommersemester2026, Softwareentwicklung, Übung04]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04/refs/heads/main/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise-04-saltyyaf1/refs/heads/main/README.md)
 
-#  Aufgabe 04
+# Aufgabe 04
 
-Softwareentwicklung SoSe2026
-============================
+# Softwareentwicklung SoSe2026
 
-Bearbeitungszeitraum
-====================
+# Bearbeitungszeitraum
 
-*01. Juni - 07. Juni 2026*
+_01. Juni - 07. Juni 2026_
 
 ## Neue Aufgaben für diese Woche
 
@@ -42,14 +39,13 @@ Wir arbeiten wieder mit GitHub. Die Arbeitsaufträge finden sich in den Issues. 
 
 ### **📌 PlantUML: Klassendiagramme**
 
-*Lernziele:* UML Klassendiagramme lesen und verstehen, ändern, implementieren, branches, pull requests, und issues in GitHub nutzen.
+_Lernziele:_ UML Klassendiagramme lesen und verstehen, ändern, implementieren, branches, pull requests, und issues in GitHub nutzen.
 
 #### Grundlegende Syntax
 
 Ein Klassendiagramm beginnt mit `@startuml` und endet mit `@enduml`.
 
-Beispiel: Einfache Klasse
--------------------
+## Beispiel: Einfache Klasse
 
 ```text @plantUML
 @startuml
@@ -61,7 +57,7 @@ class Himmelskoerper {
 @enduml
 ```
 
-```text 
+```text
 @startuml
 class Himmelskoerper {
   - name: string
@@ -70,8 +66,8 @@ class Himmelskoerper {
 }
 @enduml
 ```
-@plantUML.eval(png)
 
+@plantUML.eval(png)
 
 - Klasse: `class Klassenname`
 - Attribute: `-` (private), `+` (public), `#` (protected) Syntax: `[Sichtbarkeit] Name: Typ`
@@ -79,17 +75,16 @@ class Himmelskoerper {
 
 #### Beziehungen zwischen Klassen
 
-| Beziehung | Symbol | Bedeutung | Beispiel |   
-| --------- | ------ | --------- | -------- |
-| Vererbung | `<|--` | Klasse B erbt von Klasse A | `A <|-- B` |
-| Interface | `<|..` | Klasse B implementiert Interface A | `A <|.. B` |
-| Assoziation | `-->` |Klasse A nutzt Klasse B | `A --> B` |
-| Aggregation | `o--` |Klasse A enthält Klasse B (B existiert unabhängig) | `A o-- B` |
-| Komposition | `*--` |Klasse A enthält Klasse B (B existiert nicht ohne A) | `A *-- B` |
-| Abhängigkeit| `..>` | Schwache Abhängigkeit (z. B. Parameter) | `A ..> B` |
-    
-Beispiel: Vererbung und Assoziation
--------------------
+| Beziehung    | Symbol | Bedeutung                                            | Beispiel                           |
+| ------------ | ------ | ---------------------------------------------------- | ---------------------------------- | ---- | ----- |
+| Vererbung    | `<     | --`                                                  | Klasse B erbt von Klasse A         | `A < | -- B` |
+| Interface    | `<     | ..`                                                  | Klasse B implementiert Interface A | `A < | .. B` |
+| Assoziation  | `-->`  | Klasse A nutzt Klasse B                              | `A --> B`                          |
+| Aggregation  | `o--`  | Klasse A enthält Klasse B (B existiert unabhängig)   | `A o-- B`                          |
+| Komposition  | `*--`  | Klasse A enthält Klasse B (B existiert nicht ohne A) | `A *-- B`                          |
+| Abhängigkeit | `..>`  | Schwache Abhängigkeit (z. B. Parameter)              | `A ..> B`                          |
+
+## Beispiel: Vererbung und Assoziation
 
 ```text @plantUML
 @startuml
@@ -132,20 +127,19 @@ Planet <|-- Mond
 Mond --> Planet : umkreist
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Sichtbarkeiten (Visibility)
 
-| Symbol | Bedeutung |
-| ------ | --------- |
-| `-`    | private |
-| `#`    | protected |
+| Symbol | Bedeutung                  |
+| ------ | -------------------------- |
+| `-`    | private                    |
+| `#`    | protected                  |
 | `~`    | package private (internal) |
-| `+`    | public |
+| `+`    | public                     |
 
-
-Beispiel:
--------------------
+## Beispiel:
 
 ```text @plantUML
 @startuml
@@ -158,7 +152,7 @@ class Raumschiff {
 @enduml
 ```
 
-```text 
+```text
 @startuml
 class Raumschiff {
   - privateField: int
@@ -168,6 +162,7 @@ class Raumschiff {
 }
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Abstrakte Klassen und Interfaces
@@ -175,8 +170,7 @@ class Raumschiff {
 - Abstrakte Klasse: `abstract class Klassenname`
 - Interface: `interface InterfaceName`
 
-Beispiel:
--------------------
+## Beispiel:
 
 ```text @plantUML
 @startuml
@@ -217,12 +211,12 @@ Himmelskoerper <|-- Planet
 IBewegbar <|.. Planet
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Enums
 
-Beispiel:
--------------------
+## Beispiel:
 
 ```text @plantUML
 @startuml
@@ -255,12 +249,12 @@ class Himmelskoerper {
 Himmelskoerper *-- HimmelskoerperTyp : ist vom Typ
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Pakete (Namespaces)
 
-Beispiel:
--------------------
+## Beispiel:
 
 ```text @plantUML
 @startuml
@@ -293,14 +287,14 @@ package Raumfahrt {
 Raumschiff --> Mission : nutzt
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Notizen (Notes)
 
 Notizen können an Klassen, Methoden oder Beziehungen angehängt werden.
 
-Beispiel:
--------------------
+## Beispiel:
 
 ```text @plantUML
 @startuml
@@ -323,6 +317,7 @@ note top of Planet: Diese Klasse repräsentiert einen Planeten.
 note right of Planet:name Muss einzigartig sein.
 @enduml
 ```
+
 @plantUML.eval(png)
 
 #### Minimales Beispiel für Studierende (Zusammenfassung)
@@ -359,7 +354,7 @@ class Mond {
 
 Himmelskoerper <|-- Planet
 Planet <|-- Mond
-Himmelskoerper <|-- Stern 
+Himmelskoerper <|-- Stern
 Mond --> Planet : umkreist
 
 note top of Himmelskoerper: Basisklasse für alle Himmelskörper.
@@ -398,12 +393,13 @@ class Mond {
 
 Himmelskoerper <|-- Planet
 Planet <|-- Mond
-Himmelskoerper <|-- Stern 
+Himmelskoerper <|-- Stern
 Mond --> Planet : umkreist
 
 note top of Himmelskoerper: Basisklasse für alle Himmelskörper.
 @enduml
 ```
+
 @plantUML.eval(png)
 
 ### Zusammenfassung der wichtigsten Konzepte für die Übung
@@ -420,7 +416,6 @@ note top of Himmelskoerper: Basisklasse für alle Himmelskörper.
 
 Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
-
 ```text @plantUML
 @startuml
 
@@ -428,20 +423,58 @@ Arbeiten Sie hier !!!
 
 @enduml
 ```
-@plantUML.eval(png)
 
+@plantUML.eval(png)
 
 ## Part 2: Überarbeitung des UML Diagrams
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
-
 ```text @plantUML
 @startuml
+package RoboterDatenverwaltung{
+interface ISerializer {
+  + SpeichernAlsJSON(string) :void
+  + {static} abstract LadenAusJSON(string): Roboter
+  + SpeichernAlsCSV(string) : void
+  + {static} abstract LadenAusCSV(string) : Roboter
+    }
 
-Arbeiten Sie hier !!!
-
++ class Roboter{
+  + Name : string
+  + Typ : string
+  + Energielevel : int
+  + SpeichernAlsCSV(string) : void
+  + {static} LadenAusCSV(string) : Roboter
+  + SpeichernAlsJSON(string) : void
+  + {static} LadenAusJSON(string) : Roboter
+  + virual GetStatus : string
+  + virtual Activate : void
+    }
++ class Lieferroboter {
+    + Lieferkapazität : int
+    + Lieferroboter(string, int)
+    + Lieferroboter(int)
+    + override GetStatus() : string
+    }
+}
++ class Program {
+    - const ROBOT_DATA_FOLDER : string
+    - const ROBOT_COUNT : int
+    - {static} readonly RandomGenerator : Random
+    - {static} readonly StandardTypen : string[]
+    + {static} Main(string[]) : void
+    - {static} InitialisiereZufaelligeRoboter(int) : List<Roboter>
+    - {static} ErzeugeZufaelligenRoboter(int) : Roboter
+    - {static} GibStatusAus(IEnumerable<Roboter>) : void
+    - {static} SpeichereAlleRoboter(IEnumerable<Roboter>,string)
+    - {static} RemoveExistingRobots(string) : void
+    - {static} LadeAlleCsvRoboter(string) : List<Roboter>
+    - {static} LadeAlleJsonRoboter(string) : List<Roboter>
+    }
+ISerializer <|.. Roboter
+Roboter <|-- Lieferroboter
 @enduml
 ```
-@plantUML.eval(png)
 
+@plantUML.eval(png)
