@@ -416,21 +416,6 @@ note top of Himmelskoerper: Basisklasse für alle Himmelskörper.
 
 Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
-```text @plantUML
-@startuml
-
-Arbeiten Sie hier !!!
-
-@enduml
-```
-
-@plantUML.eval(png)
-
-## Part 2: Überarbeitung des UML Diagrams
-
-Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
-
-```text @plantUML
 @startuml
 package RoboterDatenverwaltung{
 interface ISerializer {
@@ -448,15 +433,15 @@ interface ISerializer {
   + {static} LadenAusCSV(string) : Roboter
   + SpeichernAlsJSON(string) : void
   + {static} LadenAusJSON(string) : Roboter
-  + virual GetStatus : string
-  + virtual Activate : void
+  + virtual GetStatus() : string
+  + virtual Activate() : void
     }
 + class Lieferroboter {
     + Lieferkapazität : int
-    + Lieferroboter(string, int)
-    + Lieferroboter(int)
+    + Lieferroboter(string, int,int)
+    + Lieferroboter(string) 
     + override GetStatus() : string
-    }
+    } 
 }
 + class Program {
     - const ROBOT_DATA_FOLDER : string
@@ -474,7 +459,17 @@ interface ISerializer {
     }
 ISerializer <|.. Roboter
 Roboter <|-- Lieferroboter
+
 @enduml
+
+@plantUML.eval(png)
+
+## Part 2: Überarbeitung des UML Diagrams
+
+Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
+
+```text @plantUML
+
 ```
 
 @plantUML.eval(png)
