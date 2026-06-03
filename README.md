@@ -467,9 +467,51 @@ Roboter <|-- Lieferroboter
 ## Part 2: Überarbeitung des UML Diagrams
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
+1. Changed all the names from german-english mix to pure english for clearer programm code and consitency
+2. 
+@startuml
+package RoboterDatenverwaltung{
+interface ISerializer {
+  + SafeAsJSON(string) : void
+  + {static} abstract LoadFromJSON(string): Robot
+  + SafeAsCSV(string) : void
+  + {static} abstract LoadFromCSV(string) : Robot
+    }
 
-```text @plantUML
-
-```
++ class Robot{
+  + Name : string
+  + Type : string
+  + Energylevel : int
+  + SafeAsCSV(string) : void
+  + {static} LoadFromCSV(string) : Roboter
+  + SafeAsJSON(string) : void
+  + {static} LoadFromJSON(string) : Roboter
+  + virtual GetStatus() : string
+  + virtual Activate() : void
+    }
++ class DeliveryRobot {
+    + Capacity : int
+    + DeliveryRobot(string, int,int)
+    + DerliveryRobot(string) 
+    + override GetStatus() : string
+    } 
+}
++ class Program {
+    - const ROBOT_DATA_FOLDER : string
+    - const ROBOT_COUNT : int
+    - {static} readonly RandomGenerator : Random
+    - {static} readonly StandardTypes : string[]
+    + {static} Main(string[]) : void
+    - {static} InitialiseRandomRobot(int) : List<Roboter>
+    - {static} CreateRandomRoboter(int) : Roboter
+    - {static} WriteStatus(IEnumerable<Roboter>) : void
+    - {static} SafeAllRobots(IEnumerable<Roboter>,string)
+    - {static} RemoveExistingRobots(string) : void
+    - {static} LoadAllCSVRobots(string) : List<Roboter>
+    - {static} LoadAllJSONRobots(string) : List<Roboter>
+    }
+ISerializer <|.. Robot
+Robot <|-- DeliveryRobot
+@enduml
 
 @plantUML.eval(png)
