@@ -419,46 +419,31 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 @startuml
 package RoboterDatenverwaltung{
 interface ISerializer {
-  + SpeichernAlsJSON(string) :void
-  + {static} abstract LadenAusJSON(string): Roboter
-  + SpeichernAlsCSV(string) : void
-  + {static} abstract LadenAusCSV(string) : Roboter
-    }
 
-+ class Roboter{
-  + Name : string
-  + Typ : string
-  + Energielevel : int
-  + SpeichernAlsCSV(string) : void
-  + {static} LadenAusCSV(string) : Roboter
-  + SpeichernAlsJSON(string) : void
-  + {static} LadenAusJSON(string) : Roboter
-  + virtual GetStatus() : string
-  + virtual Activate() : void
+- SpeichernAlsJSON(string) :void
+- {static} abstract LadenAusJSON(string): Roboter
+- SpeichernAlsCSV(string) : void
+- {static} abstract LadenAusCSV(string) : Roboter
+  }
+
+- class Roboter{
+  - Name : string
+  - Typ : string
+  - Energielevel : int
+  - SpeichernAlsCSV(string) : void
+  - {static} LadenAusCSV(string) : Roboter
+  - SpeichernAlsJSON(string) : void
+  - {static} LadenAusJSON(string) : Roboter
+  - virtual GetStatus() : string
+  - virtual Activate() : void
     }
-+ class Lieferroboter {
-    + Lieferkapazität : int
-    + Lieferroboter(string, int,int)
-    + Lieferroboter(string) 
-    + override GetStatus() : string
-    } 
-}
-+ class Program {
-    - const ROBOT_DATA_FOLDER : string
-    - const ROBOT_COUNT : int
-    - {static} readonly RandomGenerator : Random
-    - {static} readonly StandardTypen : string[]
-    + {static} Main(string[]) : void
-    - {static} InitialisiereZufaelligeRoboter(int) : List<Roboter>
-    - {static} ErzeugeZufaelligenRoboter(int) : Roboter
-    - {static} GibStatusAus(IEnumerable<Roboter>) : void
-    - {static} SpeichereAlleRoboter(IEnumerable<Roboter>,string)
-    - {static} RemoveExistingRobots(string) : void
-    - {static} LadeAlleCsvRoboter(string) : List<Roboter>
-    - {static} LadeAlleJsonRoboter(string) : List<Roboter>
-    }
-ISerializer <|.. Roboter
-Roboter <|-- Lieferroboter
+- class Lieferroboter { + Lieferkapazität : int + Lieferroboter(string, int,int) + Lieferroboter(string) + override GetStatus() : string
+  }
+  }
+- class Program { - const ROBOT_DATA_FOLDER : string - const ROBOT_COUNT : int - {static} readonly RandomGenerator : Random - {static} readonly StandardTypen : string[] + {static} Main(string[]) : void - {static} InitialisiereZufaelligeRoboter(int) : List<Roboter> - {static} ErzeugeZufaelligenRoboter(int) : Roboter - {static} GibStatusAus(IEnumerable<Roboter>) : void - {static} SpeichereAlleRoboter(IEnumerable<Roboter>,string) - {static} RemoveExistingRobots(string) : void - {static} LadeAlleCsvRoboter(string) : List<Roboter> - {static} LadeAlleJsonRoboter(string) : List<Roboter>
+  }
+  ISerializer <|.. Roboter
+  Roboter <|-- Lieferroboter
 
 @enduml
 
@@ -468,8 +453,44 @@ Roboter <|-- Lieferroboter
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
-```text @plantUML
+1. Changed all the names from german-english mix to pure english for clearer programm code and consistency
+2. Changed the original interface to centralize Saving/Loading Methods
+3. Added classes for CSV/Json that implement the central Repository
+4. In the future if we want to add additional saving methods we only need to initialize a new class
+5. This way we also don't need to change the functions directly in the robot class
 
-```
+@startuml
+   interface IRobotRepository { + SaveAll(IEnumerable<Robot>, string) : void + LoadAll(string) : List<Robot>
+   }
 
+class CsvRobotRepository { + SaveAll(IEnumerable<Robot>, string) : void + LoadAll(string) : List<Robot>
+}
+
+class JsonRobotRepository { + SaveAll(IEnumerable<Robot>, string) : void + LoadAll(string) : List<Robot>
+}
+
+class Robot { + Name : string + Type : string + Energylevel : int + virtual GetStatus() : string + virtual Activate() : void
+}
+
+class DeliveryRobot { + Capacity : int + DeliveryRobot(string, string, int, int) + DeliveryRobot(string) + override GetStatus() : string
+}
+
+class Program { - const ROBOT_DATA_FOLDER : string - const ROBOT_COUNT : int - {static} readonly RandomGenerator : Random - {static} readonly StandardTypes : string[] + {static} Main(string[]) : void - {static} InitialiseRandomRobots(int) : List<Robot> - {static} CreateRandomRobot(int) : Robot - {static} WriteStatus(IEnumerable<Robot>) : void - {static} RemoveExistingRobots(string) : void
+}
+
+' Beziehungen: Interfaces werden von den Klassen implementiert (Pfeil zeigt zum Interface)
+IRobotRepository <|.. CsvRobotRepository
+IRobotRepository <|.. JsonRobotRepository
+
+' Vererbung (Pfeil zeigt zur Basisklasse)
+Robot <|-- DeliveryRobot
+
+' Repositories nutzen die Robot-Klasse
+JsonRobotRepository --> Robot
+CsvRobotRepository --> Robot
+
+' Program steuert das Zusammenspiel
+Program --> IRobotRepository
+Program --> Robot
+@enduml
 @plantUML.eval(png)
